@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
+@inject("agoraInventory")
 @observer
 class Item extends Component {
 
     buyItem = event => {
-        this.props.store.buyItem(event.target.value)
+        this.props.agoraInventory.buyItem(event.target.value)
     }
 
     changePrice = () => {
         let price = parseInt(prompt("Enter the value for the new price", this.props.item.price))
-        this.props.store.changePrice(this.props.item.name, price)
+        this.props.agoraInventory.changePrice(this.props.item.name, price)
     }
 
     conditionalPlural = text => this.props.item.quantity > 1 ? text : ""
